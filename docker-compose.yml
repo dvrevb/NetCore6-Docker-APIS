@@ -16,11 +16,17 @@ services:
   ContactsCache:
     image: redis
     container_name: ContactsCache
+    command: --port 6380
+    expose:
+      - "6380"
     ports: 
-      - "6379:6379"
+      - "6380:6380"
     
   ClassroomCache:
     image: redis
     container_name: ClassroomCache
+    command: --port 6377
+    expose:
+      - "6377"
     ports: 
-      - "6377:6379"
+      - "6377:6377"
