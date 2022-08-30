@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classroom", "Classroom\Clas
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Contacts", "Contacts\Contacts.csproj", "{08887877-DA87-4F48-8FF5-1F59BB70C9B6}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{FF54E897-CAC2-4429-B313-766CA1F4D4A6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{08887877-DA87-4F48-8FF5-1F59BB70C9B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08887877-DA87-4F48-8FF5-1F59BB70C9B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08887877-DA87-4F48-8FF5-1F59BB70C9B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF54E897-CAC2-4429-B313-766CA1F4D4A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF54E897-CAC2-4429-B313-766CA1F4D4A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF54E897-CAC2-4429-B313-766CA1F4D4A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF54E897-CAC2-4429-B313-766CA1F4D4A6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

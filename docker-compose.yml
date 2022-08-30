@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  contacts:
+    image: ${DOCKER_REGISTRY-}contacts
+    build:
+      context: .
+      dockerfile: Contacts\Dockerfile
+
+  classroom:
+    image: ${DOCKER_REGISTRY-}classroom
+    build:
+      context: .
+      dockerfile: Classroom\Dockerfile
+
+  ContactsCache:
+    image: redis
+    container_name: ContactsCache
+    ports: 
+      - "6379:6379"
+    
+  ClassroomCache:
+    image: redis
+    container_name: ClassroomCache
+    ports: 
+      - "6377:6379"

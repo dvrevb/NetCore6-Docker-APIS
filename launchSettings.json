@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "Docker Compose": {
+      "commandName": "DockerCompose",
+      "serviceActions": {
+        "classroom": "StartDebugging",
+        "ClassroomCache": "StartWithoutDebugging",
+        "contacts": "StartDebugging",
+        "ContactsCache": "StartWithoutDebugging"
+      },
+      "commandVersion": "1.0"
+    }
+  }
+}

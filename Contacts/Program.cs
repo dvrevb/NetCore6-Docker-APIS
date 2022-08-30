@@ -9,8 +9,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddStackExchangeRedisCache(options =>
 {
-    options.Configuration = "redis:6379"; // redis is the container name of the redis service. 6379 is the default port
-    options.InstanceName = "SampleInstance";
+    options.Configuration = "ContactsCache:6379"; // redis is the container name of the redis service. 6379 is the default port
 });
 
 var app = builder.Build();
