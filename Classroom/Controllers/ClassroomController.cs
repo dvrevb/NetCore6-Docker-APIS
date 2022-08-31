@@ -17,33 +17,27 @@ namespace Classroom.Controllers
             _cacheService = cacheService;
         }
 
+        [HttpPost("AddStudent/{id}")]
+        public async Task<IActionResult> AddStudent(string id)
+        {
+            var request = new HttpRequestMessage();
+            request.RequestUri = new Uri("http://webapi/Counter");
+            var lecture = JsonConvert.DeserializeObject(await _cacheService.GetValueAsync(id));
+            return Ok(await _cacheService.GetValueAsync(id));
+        }
+
         [HttpGet("Get/{id}")]
         public async Task<IActionResult> Get(string id)
         {
             //var value = _cache.Get(id);
             var lecture = JsonConvert.DeserializeObject(await _cacheService.GetValueAsync(id));
             return Ok(await _cacheService.GetValueAsync(id));
-
-            //var value = await _cache.GetAsync(id.ToString());
-            //return string.IsNullOrEmpty(value.ToString()) ? NotFound() : Ok(JsonConvert.SerializeObject(value));
         }
 
         [HttpPost("Add/{Name}")]
         public async Task<IActionResult> AddAsync(string Name)
         {
-            /*  var id = Guid.NewGuid().ToString();
-               var options = new DistributedCacheEntryOptions
-               {
-                   AbsoluteExpirationRelativeToNow = TimeSpan.FromHours(1),
-                   SlidingExpiration = TimeSpan.FromMinutes(10)
-               };
 
-              Contact c = new Contact { Name = Name, DateOfBirth = DateOfBirth };
-              await _cache.SetStringAsync("deneme", JsonConvert.SerializeObject(c), options);
-              //await _cache.SetStringAsync("deneme1", "bu bir denemedir2", options);
-
-              //await _cache.SetAsync("zaman", Encoding.UTF8.GetBytes(DateTime.Now.ToString()));
-              return Ok(id);*/
             var id = Guid.NewGuid().ToString();
             List<string> students = new List<string>();
             Lecture c = new Lecture { Name = Name, Students = students};

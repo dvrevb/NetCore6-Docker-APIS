@@ -18,11 +18,8 @@ namespace Classroom.Services.Concrete
             _cache = redisCon.GetDatabase();
         }
 
-        public IEnumerable<string> GetAllAsync()
+        public IEnumerable<string> GetAll()
         {
-            //var endPoint = _redisCon.GetEndPoints().First();
-            //RedisKey[] keys = _redisCon.GetServer(endPoint).Keys(pattern: "*").ToArray();
-
             var endPoint = _redisCon.GetEndPoints().First();
             IServer server = _redisCon.GetServer(endPoint);
             IEnumerable<string> keys = server.Keys().Select(key => (string)key).ToList();
