@@ -2,13 +2,16 @@
   "profiles": {
     "Docker Compose": {
       "commandName": "DockerCompose",
+      "commandVersion": "1.0",
+      "composeLaunchAction": "LaunchBrowser",
+      "composeLaunchServiceName": "contactsapi",
+      "composeLaunchUrl": "{Scheme}://{ServiceIPAddress}{ServicePort}/swagger",
       "serviceActions": {
-        "classroom": "StartDebugging",
-        "ClassroomCache": "StartWithoutDebugging",
-        "contacts": "StartDebugging",
-        "ContactsCache": "StartWithoutDebugging"
-      },
-      "commandVersion": "1.0"
+        "classroomapi": "StartDebugging",
+        "classroomcache": "StartWithoutDebugging",
+        "contactsapi": "StartDebugging",
+        "contactscache": "StartWithoutDebugging"
+      }
     }
   }
 }

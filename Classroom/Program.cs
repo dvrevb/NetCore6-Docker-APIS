@@ -12,9 +12,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 IConfiguration configuration = builder.Configuration;
-
-var multiplexer = ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis"));
-builder.Services.AddSingleton<IConnectionMultiplexer>(multiplexer);
+builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")));
 builder.Services.AddSingleton<ICacheService, RedisCacheService>();
 
 var app = builder.Build();

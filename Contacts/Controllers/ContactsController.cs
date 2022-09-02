@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Contacts.Services.Abstract;
+using System.Xml.Linq;
+using Contacts.DTO;
 
 namespace Contacts.Controllers
 {
@@ -17,29 +19,42 @@ namespace Contacts.Controllers
         }
 
         [HttpGet("GetAll")]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok( _cacheService.GetAll().ToList());        
+            var keys = _cacheService.GetAll();
+            var names = new List<string>();
+            foreach (var item in keys)
+            {
+                var value = await _cacheService.GetValueAsync(item);
+                var contact = JsonConvert.DeserializeObject<Contact>(value);
+
+                if (contact != null)
+                    names.Add(contact.Name);
+            }
+            return Ok(names);
         }
 
-        [HttpGet("Get/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            return Ok(await _cacheService.GetValueAsync(id));
+            var contact = JsonConvert.DeserializeObject<Contact>(await _cacheService.GetValueAsync(id));
+            if (contact == null)
+                return NotFound();
+
+            ContactDto c = new ContactDto { Name = contact.Name, Age = DateTime.Now.Year - contact.DateOfBirth.Year };
+            return Ok(c);
         }
 
-        [HttpPost("Add/{Name}/{DateOfBirth}")]
-        public async Task<IActionResult> AddAsync(string? Name, DateTime? DateOfBirth)
+        [HttpPost("{name}/{dateOfBirth}")]
+        public async Task<IActionResult> AddAsync(string name, DateTime dateOfBirth)
         {
+            if (string.IsNullOrWhiteSpace(name))
+                return NotFound();
+
             var id = Guid.NewGuid().ToString();
-            Contact c = new Contact { Name = Name, DateOfBirth = DateOfBirth };
+            Contact c = new Contact { Name = name, DateOfBirth = dateOfBirth };
             await _cacheService.SetValueAsync(id, JsonConvert.SerializeObject(c));
-            return Ok();
-        }
-        [HttpPost("Delete/{id}")]
-        public async Task<IActionResult> DeleteAsync(string id)
-        {
-            return View();
+            return Ok(id);
         }
     }
 }

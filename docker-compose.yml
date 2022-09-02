@@ -1,32 +1,32 @@
 version: '3.4'
 
 services:
-  contacts:
+  contactsapi:
     image: ${DOCKER_REGISTRY-}contacts
+    container_name: ContactsAPI
+    hostname: contactsapi
     build:
       context: .
       dockerfile: Contacts\Dockerfile
 
-  classroom:
+  classroomapi:
     image: ${DOCKER_REGISTRY-}classroom
+    container_name: ClassroomAPI
+    hostname: classroomapi
     build:
       context: .
       dockerfile: Classroom\Dockerfile
 
-  ContactsCache:
+  contactscache:
     image: redis
     container_name: ContactsCache
     command: --port 6380
-    expose:
-      - "6380"
     ports: 
       - "6380:6380"
     
-  ClassroomCache:
+  classroomcache:
     image: redis
     container_name: ClassroomCache
     command: --port 6377
-    expose:
-      - "6377"
     ports: 
       - "6377:6377"

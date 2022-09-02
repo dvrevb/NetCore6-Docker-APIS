@@ -10,7 +10,7 @@ namespace Classroom.Services.Concrete
     {
         private readonly IConnectionMultiplexer _redisCon;
         private readonly IDatabase _cache;
-        private TimeSpan ExpireTime => TimeSpan.FromDays(1);
+        private TimeSpan ExpireTime => TimeSpan.FromDays(30);
 
         public RedisCacheService(IConnectionMultiplexer redisCon)
         {

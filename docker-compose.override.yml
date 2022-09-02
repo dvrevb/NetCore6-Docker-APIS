@@ -1,13 +1,13 @@
 version: '3.4'
 
 services:
-  contacts:
+  contactsapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80"
 
-  classroom:
+  classroomapi:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:

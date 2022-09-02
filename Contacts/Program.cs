@@ -11,14 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//builder.Services.AddStackExchangeRedisCache(options =>
-//{
-//    options.Configuration = "ContactsCache:6379"; // redis is the container name of the redis service. 6379 is the default port
-//});
-
 IConfiguration configuration = builder.Configuration;
-var multiplexer = ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis"));
-builder.Services.AddSingleton<IConnectionMultiplexer>(multiplexer);
+builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(configuration.GetConnectionString("Redis")));
 builder.Services.AddSingleton<ICacheService, RedisCacheService>();
 var app = builder.Build();
 
