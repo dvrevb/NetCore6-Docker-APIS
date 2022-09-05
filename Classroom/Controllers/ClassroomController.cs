@@ -1,11 +1,17 @@
-﻿using Classroom.DTO;
-using Classroom.Entities;
+﻿using Classroom.Entities;
 using Classroom.Services.Abstract;
+using Contacts.Entities;
+using DockerAPIS.Business.Abstract;
+using DockerAPIS.Core.Models;
+using DockerAPIS.Entities;
+using DockerAPIS.Entities.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Net.Http;
+using System.Net.Http.Json;
 
 namespace Classroom.Controllers
 {
@@ -13,11 +19,13 @@ namespace Classroom.Controllers
     [ApiController]
     public class ClassroomController : ControllerBase
     {
-        private readonly ICacheService _cacheService;
+        private readonly IClassroomService _classroomService;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public ClassroomController(ICacheService cacheService)
+        public ClassroomController(IClassroomService classroomService, IHttpClientFactory httpClientFactory)
         {
-            _cacheService = cacheService;
+            _httpClientFactory = httpClientFactory;
+            _classroomService = classroomService;
         }
 
         [HttpPost("AddStudent/{lectureId}/{personId}")]
@@ -26,57 +34,47 @@ namespace Classroom.Controllers
             if (lectureId == null || personId == null)
                 return NotFound();
 
-            HttpClient client = new HttpClient();
-            HttpResponseMessage personResponse = await client.GetAsync("http://contactsapi/api/Contacts/" + personId);
+            var lecture = await _classroomService.GetAsync(lectureId);
 
-            var lecture = await _cacheService.GetValueAsync(lectureId);
-            var lectureInfo = JsonConvert.DeserializeObject<Lecture>(lecture);
-
-            if (!personResponse.IsSuccessStatusCode || lecture == null)
+            var response = await _httpClientFactory.CreateClient()
+                .GetAsync("http://contactsapi/api/Contacts/" + personId);         
+           
+            if (!response.IsSuccessStatusCode || lecture==null || lecture.Success==false)
                 return NotFound();
 
-            lectureInfo?.Students.Add(personId);
+            lecture.Entity.Students.Add(personId);
 
-            var result = await _cacheService.SetValueAsync(lectureId, JsonConvert.SerializeObject(lectureInfo));
-
-            return (result == true) ? Ok() : BadRequest();
+            var result = await _classroomService.CreateAsync(lectureId,lecture.Entity);
+            return (result.Success == true) ? Ok(result.Entity) : BadRequest();
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            var lecture = await _cacheService.GetValueAsync(id);
-            if (lecture == null)
+            var lecture = await _classroomService.GetAsync(id);
+
+            if (lecture == null || lecture.Success== false)
                 return NotFound();
 
-            HttpClient client = new HttpClient();
-            HttpResponseMessage personResponse;
+            var client = _httpClientFactory.CreateClient();
 
-            var lectureInfo = JsonConvert.DeserializeObject<Lecture>(lecture);
-            if (lectureInfo != null)
-            {          
-                List<Student> studentList = new List<Student>();
-                foreach (var item in lectureInfo.Students)
+            List<Student> studentList = new List<Student>();
+
+            foreach (var item in lecture.Entity.Students)
+            {
+                var contactResponse = await client.GetAsync("http://contactsapi/api/Contacts/" + item);
+                if (contactResponse.IsSuccessStatusCode)
                 {
-                    personResponse = await client.GetAsync("http://contactsapi/api/Contacts/" + item);
-                   
-                    if (personResponse.IsSuccessStatusCode)
+                    var contact = JsonConvert.DeserializeObject<Contact>(await contactResponse.Content.ReadAsStringAsync());
+                    if (contact!= null)
                     {
-                        string person = await personResponse.Content.ReadAsStringAsync();
-                        var studentDateOfBirth = JObject.Parse(person)["DateOfBirth"];
-                        var studentName = JObject.Parse(person)["Name"];
-                        int age;
-                        if (studentName != null && studentDateOfBirth != null)
-                        {
-                            age = DateTime.Now.Year - Convert.ToDateTime(studentDateOfBirth).Year;
-                            studentList.Add(new Student { Name = studentName.ToString(), Age = age }); ;
-                        }
+                        studentList.Add(new Student
+                        { Name = contact.Name, Age = DateTime.Now.Year - contact.DateOfBirth.Year });
                     }
                 }
-                LectureDto dto = new LectureDto { LectureName = lectureInfo.Name, Students = studentList };
-                return Ok(dto);
             }
-            return NotFound();
+            LectureDto dto = new LectureDto { LectureName = lecture.Entity.Name ,Students = studentList };
+            return Ok(dto);
         }
 
         [HttpPost("Add/{Name}")]
@@ -85,8 +83,8 @@ namespace Classroom.Controllers
             var id = Guid.NewGuid().ToString();
             List<string> students = new List<string>();
             Lecture c = new Lecture { Name = Name, Students = students };
-            await _cacheService.SetValueAsync(id, JsonConvert.SerializeObject(c));
-            return Ok();
+            var result = await _classroomService.CreateAsync(id,c);
+            return Ok(id);
         }
     }
 }

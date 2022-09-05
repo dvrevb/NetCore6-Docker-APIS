@@ -3,7 +3,10 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Contacts.Services.Abstract;
 using System.Xml.Linq;
-using Contacts.DTO;
+using DockerAPIS.Business.Abstract;
+using Newtonsoft.Json.Linq;
+using System;
+using DockerAPIS.Entities.DTO;
 
 namespace Contacts.Controllers
 {
@@ -11,38 +14,39 @@ namespace Contacts.Controllers
     [Route("api/[controller]")]
     public class ContactsController : Controller
     {
-        private readonly ICacheService _cacheService;
+        private readonly IContactService _contactService;
 
-        public ContactsController(ICacheService cacheService)
+        public ContactsController(IContactService contactService)
         {
-            _cacheService = cacheService;
+            _contactService = contactService;
         }
 
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var keys = _cacheService.GetAll();
-            var names = new List<string>();
-            foreach (var item in keys)
-            {
-                var value = await _cacheService.GetValueAsync(item);
-                var contact = JsonConvert.DeserializeObject<Contact>(value);
+            var result = await _contactService.GetAllAsync();
+            if (!result.Success)
+                return NotFound();
 
-                if (contact != null)
-                    names.Add(contact.Name);
+            List<string> names = new List<string>();
+
+            foreach (var item in result.Result)
+            {
+                names.Add(item.Name);
             }
+
             return Ok(names);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(string id)
         {
-            var contact = JsonConvert.DeserializeObject<Contact>(await _cacheService.GetValueAsync(id));
-            if (contact == null)
-                return NotFound();
-
-            ContactDto c = new ContactDto { Name = contact.Name, Age = DateTime.Now.Year - contact.DateOfBirth.Year };
+            var result = await _contactService.GetAsync(id);
+            if (!result.Success)
+                return NotFound();   
+            ContactDto c = new ContactDto { Name = result.Entity.Name, Age = DateTime.Now.Year - result.Entity.DateOfBirth.Year };
             return Ok(c);
+
         }
 
         [HttpPost("{name}/{dateOfBirth}")]
@@ -53,7 +57,9 @@ namespace Contacts.Controllers
 
             var id = Guid.NewGuid().ToString();
             Contact c = new Contact { Name = name, DateOfBirth = dateOfBirth };
-            await _cacheService.SetValueAsync(id, JsonConvert.SerializeObject(c));
+            var result = await _contactService.CreateAsync(id, c);
+            if (!result.Success)
+                return BadRequest();
             return Ok(id);
         }
     }
