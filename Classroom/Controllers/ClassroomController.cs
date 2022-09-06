@@ -47,7 +47,7 @@ namespace Classroom.Controllers
             return (result.Success !=false ) ? Ok(result.Entity) : NotFound();
         }
 
-        [HttpPost("Add/{name}")]
+        [HttpPost("{name}")]
         public async Task<IActionResult> AddAsync(string name)
         {
             var id = Guid.NewGuid().ToString();           

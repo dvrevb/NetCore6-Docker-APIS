@@ -22,8 +22,8 @@ namespace Contacts.Controllers
             _contactService = contactService;
         }
 
-        [HttpGet("GetAll")]
-        public async Task<IActionResult> GetAll()
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
             var result = await _contactService.GetAllAsync();          
             return (result!=null) ? Ok(result.Result.Select(x => x.Name)) : NotFound();
