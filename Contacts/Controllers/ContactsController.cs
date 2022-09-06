@@ -25,18 +25,8 @@ namespace Contacts.Controllers
         [HttpGet("GetAll")]
         public async Task<IActionResult> GetAll()
         {
-            var result = await _contactService.GetAllAsync();
-            if (!result.Success)
-                return NotFound();
-
-            List<string> names = new List<string>();
-
-            foreach (var item in result.Result)
-            {
-                names.Add(item.Name);
-            }
-
-            return Ok(names);
+            var result = await _contactService.GetAllAsync();          
+            return (result!=null) ? Ok(result.Result.Select(x => x.Name)) : NotFound();
         }
 
         [HttpGet("{id}")]
@@ -45,9 +35,7 @@ namespace Contacts.Controllers
             var result = await _contactService.GetAsync(id);
             if (!result.Success)
                 return NotFound();   
-            ContactDto c = new ContactDto { Name = result.Entity.Name, Age = DateTime.Now.Year - result.Entity.DateOfBirth.Year };
-            return Ok(c);
-
+            return Ok(result.Entity);
         }
 
         [HttpPost("{name}/{dateOfBirth}")]
@@ -57,11 +45,9 @@ namespace Contacts.Controllers
                 return NotFound();
 
             var id = Guid.NewGuid().ToString();
-            Contact c = new Contact { Name = name, DateOfBirth = dateOfBirth };
-            var result = await _contactService.CreateAsync(id, c);
-            if (!result.Success)
-                return BadRequest();
-            return Ok(id);
+            var result = await _contactService.CreateAsync(id, name, dateOfBirth);
+
+            return result.Success ? Ok(id) : BadRequest();
         }
     }
 }

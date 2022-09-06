@@ -1,6 +1,7 @@
 ﻿
 using DockerAPIS.Core.Models;
 using DockerAPIS.Entities;
+using DockerAPIS.Entities.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace DockerAPIS.Business.Abstract
     public interface IContactService
     {
         Task<GetManyResult<Contact>> GetAllAsync();
-        Task<GetOneResult<Contact>> GetAsync(string id);
-        Task<GetOneResult<Contact>> CreateAsync(string id, Contact contact);
+        Task<GetOneResult<ContactDto>> GetAsync(string id);
+        Task<GetOneResult<Contact>> CreateAsync(string id, string name, DateTime dateOfBirth);
     }
 }
