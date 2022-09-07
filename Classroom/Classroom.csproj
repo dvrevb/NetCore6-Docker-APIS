@@ -20,6 +20,7 @@
     <ProjectReference Include="..\DockerAPIS.Core\DockerAPIS.Core.csproj" />
     <ProjectReference Include="..\DockerAPIS.DataAccess\DockerAPIS.DataAccess.csproj" />
     <ProjectReference Include="..\DockerAPIS.Entities\DockerAPIS.Entities.csproj" />
+    <ProjectReference Include="..\DockerAPIs.Services.Classroom.Model.Exchange\DockerAPIs.Services.Classroom.Model.Exchange.csproj" />
   </ItemGroup>
 
 </Project>

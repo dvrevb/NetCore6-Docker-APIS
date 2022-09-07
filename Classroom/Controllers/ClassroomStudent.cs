@@ -1,6 +1,6 @@
 ﻿
 using Classroom.Services.Abstract;
-using DockerAPIs.Services.Classroom.Model.Exchange.Classroom.Add;
+
 using DockerAPIS.Business.Abstract;
 using DockerAPIS.Core.Models;
 using DockerAPIS.Entities;
@@ -27,11 +27,11 @@ namespace Classroom.Controllers
             _classroomService = classroomService;
         }
 
-        [HttpPut("{lectureId}/{personId}")]
-        public async Task<IActionResult> AddStudent(string lectureId, string personId)
+        [HttpPost("{lectureId}/{personId}")]
+        public async Task<IActionResult> AddStudentToClassroom(string lectureId, string personId)
         {
-            if (String.IsNullOrWhiteSpace(lectureId) || personId == null)
-                return BadRequest();
+            if (lectureId == null || personId == null)
+                return NotFound();
 
            var result = await _classroomService.AddStudent(lectureId, personId);
             return (result.Success == true) ? Ok(result.Entity) : BadRequest();
@@ -47,8 +47,8 @@ namespace Classroom.Controllers
             return (result.Success !=false ) ? Ok(result.Entity) : NotFound();
         }
 
-        [HttpPost()]
-        public async Task<IActionResult> Add(AddClassroomRequestModel request)
+        [HttpPost("{name}")]
+        public async Task<IActionResult> Add(string name)
         {
             var id = Guid.NewGuid().ToString();           
             var result = await _classroomService.CreateAsync(id, name);          
