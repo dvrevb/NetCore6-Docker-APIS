@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\..\Architecture\Data\DockerAPIS.Architecture.Data.Cache\DockerAPIS.Architecture.Data.Cache.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Architecture\Web\DockerAPIS.Architecture.Web.Core\DockerAPIS.Architecture.Web.Core.csproj" />
+    <ProjectReference Include="..\..\..\Manager\DockerAPIS.Services.Contact.Manager.Business\DockerAPIS.Services.Contact.Manager.Business.csproj" />
+    <ProjectReference Include="..\..\..\Manager\DockerAPIS.Services.Contact.Manager.Mapper\DockerAPIS.Services.Contact.Manager.Mapper.csproj" />
+    <ProjectReference Include="..\..\..\Manager\DockerAPIS.Services.Contact.Manager.Operation\DockerAPIS.Services.Contact.Manager.Operation.csproj" />
+    <ProjectReference Include="..\..\..\Model\DockerAPIS.Services.Contact.Model.Exchange\DockerAPIS.Services.Contact.Model.Exchange.csproj" />
+  </ItemGroup>
+
+</Project>

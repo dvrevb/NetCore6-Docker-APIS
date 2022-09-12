@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Model\DockerAPIS.Services.Contact.Model.Entity\DockerAPIS.Services.Contact.Model.Entity.csproj" />
+    <ProjectReference Include="..\..\Model\DockerAPIS.Services.Contact.Model.Exchange\DockerAPIS.Services.Contact.Model.Exchange.csproj" />
+  </ItemGroup>
+
+</Project>

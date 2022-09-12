@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "DockerAPIS.Architecture.Concern.Options": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:49516;http://localhost:49519"
+    }
+  }
+}

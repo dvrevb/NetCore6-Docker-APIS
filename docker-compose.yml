@@ -7,7 +7,7 @@ services:
     hostname: contactsapi
     build:
       context: .
-      dockerfile: Contacts\Dockerfile
+      dockerfile: Services\Contact\Web\API\DockerAPIS.Services.Contact.Web.API\Dockerfile
 
   classroomapi:
     image: ${DOCKER_REGISTRY-}classroom
@@ -15,7 +15,7 @@ services:
     hostname: classroomapi
     build:
       context: .
-      dockerfile: Classroom\Dockerfile
+      dockerfile: Services\Classroom\Web\API\DockerAPIS.Services.Classroom.Web.API\Dockerfile
 
   contactscache:
     image: redis

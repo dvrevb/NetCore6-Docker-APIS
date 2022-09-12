@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="GetLectureList\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DockerAPIS.Services.Classroom.Model.DTO\DockerAPIS.Services.Classroom.Model.DTO.csproj" />
+  </ItemGroup>
+
+</Project>

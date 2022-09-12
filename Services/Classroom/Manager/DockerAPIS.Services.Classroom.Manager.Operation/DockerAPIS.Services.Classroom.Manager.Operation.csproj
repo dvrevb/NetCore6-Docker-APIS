@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Architecture\Data\DockerAPIS.Architecture.Data.Cache\DockerAPIS.Architecture.Data.Cache.csproj" />
+    <ProjectReference Include="..\..\Model\DockerAPIS.Services.Classroom.Model.Entity\DockerAPIS.Services.Classroom.Model.Entity.csproj" />
+  </ItemGroup>
+
+</Project>
