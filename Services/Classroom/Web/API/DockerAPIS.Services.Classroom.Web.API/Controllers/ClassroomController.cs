@@ -16,7 +16,7 @@ namespace DockerAPIS.Services.Classroom.Web.API.Controllers
             this.classroomBusinessManager = classroomBusinessManager;
         }
 
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> AddStudent(AddStudentRequestModel model)
         {
             return Ok(await classroomBusinessManager.AddStudent(model));
