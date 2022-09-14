@@ -1,0 +1,5 @@
+{
+  "RedisSettings": {
+    "ConnectionString": "ClassroomCache:6377"
+  }
+}

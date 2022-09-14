@@ -5,9 +5,9 @@ using StackExchange.Redis;
 
 namespace DockerAPIS.Services.Classroom.Manager.Operation.Implementation
 {
-    public class ClassroomCacheOperation : RedisCaching<Lecture>, IClassroomCacheOperation
+    public class ClassroomOperations : RedisCaching<Lecture>, IClassroomOperations
     {
-        public ClassroomCacheOperation(IDatabase redisDb, IConnectionMultiplexer multiplexer) : base(redisDb, multiplexer)
+        public ClassroomOperations(IDatabase redisDb, IConnectionMultiplexer multiplexer) : base(redisDb, multiplexer)
         {
         }
     }

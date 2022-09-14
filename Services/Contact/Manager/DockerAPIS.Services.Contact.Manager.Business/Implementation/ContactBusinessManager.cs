@@ -11,9 +11,9 @@ namespace DockerAPIS.Services.Contact.Manager.Business.Implementation
     public class ContactBusinessManager : IContactBusinessManager
     {
         private readonly IMapper mapper;
-        private readonly IContactCacheOperation contactCacheOperations;
+        private readonly IContactOperation contactCacheOperations;
 
-        public ContactBusinessManager(IMapper mapper, IContactCacheOperation contactCacheOperations)
+        public ContactBusinessManager(IMapper mapper, IContactOperation contactCacheOperations)
         {
             this.mapper = mapper;
             this.contactCacheOperations = contactCacheOperations;

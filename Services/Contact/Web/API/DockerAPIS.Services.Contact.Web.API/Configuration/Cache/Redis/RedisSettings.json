@@ -1,0 +1,5 @@
+{
+  "RedisSettings": {
+    "ConnectionString": "ContactsCache:6380"
+  }
+}

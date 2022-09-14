@@ -16,14 +16,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
-
+builder.Configuration.AddJsonFile($"Configuration/Cache/Redis/RedisSettings.json");
 CommonStartup.CommonServiceConfiguration(new ServiceConfigurationOptions(builder.Services, builder.Configuration)
 {
     AutoMapperProfile = new ClassroomMappingProfile()
 });
 
 builder.Services.AddScoped<IClassroomBusinessManager, ClassroomBusinessManager>();
-builder.Services.AddScoped<IClassroomCacheOperation, ClassroomCacheOperation>();
+builder.Services.AddScoped<IClassroomOperations, ClassroomOperations>();
 builder.Services.AddScoped<IContactDataStore, ContactsServiceManager>();
 
 var app = builder.Build();

@@ -22,9 +22,9 @@ namespace DockerAPIS.Services.Classroom.Manager.Business.Implementation
     {
         private readonly IContactDataStore contactDataStore;
         private readonly IMapper mapper;
-        private readonly IClassroomCacheOperation classroomCacheOperation;
+        private readonly IClassroomOperations classroomCacheOperation;
 
-        public ClassroomBusinessManager(IContactDataStore contactDataStore, IMapper mapper, IClassroomCacheOperation classroomCacheOperation)
+        public ClassroomBusinessManager(IContactDataStore contactDataStore, IMapper mapper, IClassroomOperations classroomCacheOperation)
         {
             this.contactDataStore = contactDataStore;
             this.mapper = mapper;

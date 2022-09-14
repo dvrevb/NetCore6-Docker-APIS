@@ -3,7 +3,7 @@ using DockerAPIS.Services.Classroom.Model.Entity;
 
 namespace DockerAPIS.Services.Classroom.Manager.Operation.Interface
 {
-    public interface IClassroomCacheOperation : ICache<Lecture>
+    public interface IClassroomOperations : ICache<Lecture>
     {
     }
 }

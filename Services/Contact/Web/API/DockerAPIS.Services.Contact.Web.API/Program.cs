@@ -14,13 +14,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Configuration.AddJsonFile($"Configuration/Cache/Redis/RedisSettings.json", false, true);
 CommonStartup.CommonServiceConfiguration(new ServiceConfigurationOptions(builder.Services, builder.Configuration)
 {
     AutoMapperProfile = new ContactMappingProfile()
 });
+
 builder.Services.AddScoped<IContactBusinessManager, ContactBusinessManager>();
-builder.Services.AddScoped<IContactCacheOperation, ContactCacheOperation>();
+builder.Services.AddScoped<IContactOperation, ContactOperation>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

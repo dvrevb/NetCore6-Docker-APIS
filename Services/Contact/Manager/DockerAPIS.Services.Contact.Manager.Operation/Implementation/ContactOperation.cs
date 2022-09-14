@@ -5,9 +5,9 @@ using StackExchange.Redis;
 
 namespace DockerAPIS.Services.Contact.Manager.Operation.Implementation
 {
-    public class ContactCacheOperation : RedisCaching<Person>, IContactCacheOperation
+    public class ContactOperation : RedisCaching<Person>, IContactOperation
     {
-        public ContactCacheOperation(IDatabase redisDb, IConnectionMultiplexer multiplexer) : base(redisDb, multiplexer)
+        public ContactOperation(IDatabase redisDb, IConnectionMultiplexer multiplexer) : base(redisDb, multiplexer)
         {
         }
     }
