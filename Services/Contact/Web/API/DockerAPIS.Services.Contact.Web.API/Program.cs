@@ -4,8 +4,9 @@ using DockerAPIS.Services.Contact.Manager.Mapper;
 using DockerAPIS.Services.Contact.Manager.Business.Implementation;
 using DockerAPIS.Services.Contact.Manager.Operation.Interfaces;
 using DockerAPIS.Services.Contact.Manager.Operation.Implementation;
-
-
+using DockerAPIS.Architecture.Data.Cache.Base;
+using DockerAPIS.Architecture.Data.Cache.Concrete.Redis;
+using DockerAPIS.Services.Contact.Model.Entity;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -22,6 +23,7 @@ CommonStartup.CommonServiceConfiguration(new ServiceConfigurationOptions(builder
 
 builder.Services.AddScoped<IContactBusinessManager, ContactBusinessManager>();
 builder.Services.AddScoped<IContactOperation, ContactOperation>();
+builder.Services.AddScoped<ICache<Person>, RedisCaching<Person>>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

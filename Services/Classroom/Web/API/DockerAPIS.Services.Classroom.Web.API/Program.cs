@@ -1,3 +1,5 @@
+using DockerAPIS.Architecture.Data.Cache.Base;
+using DockerAPIS.Architecture.Data.Cache.Concrete.Redis;
 using DockerAPIS.Architecture.Web.Core;
 using DockerAPIS.Services.Classroom.ExternalData.Manager.Interfaces;
 using DockerAPIS.Services.Classroom.ExternalData.Manager.Service.Contacts;
@@ -6,6 +8,7 @@ using DockerAPIS.Services.Classroom.Manager.Business.Interface;
 using DockerAPIS.Services.Classroom.Manager.Mapper;
 using DockerAPIS.Services.Classroom.Manager.Operation.Implementation;
 using DockerAPIS.Services.Classroom.Manager.Operation.Interface;
+using DockerAPIS.Services.Classroom.Model.Entity;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,7 +28,7 @@ CommonStartup.CommonServiceConfiguration(new ServiceConfigurationOptions(builder
 builder.Services.AddScoped<IClassroomBusinessManager, ClassroomBusinessManager>();
 builder.Services.AddScoped<IClassroomOperations, ClassroomOperations>();
 builder.Services.AddScoped<IContactDataStore, ContactsServiceManager>();
-
+builder.Services.AddScoped<ICache<Lecture>, RedisCaching<Lecture>>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
