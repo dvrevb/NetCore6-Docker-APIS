@@ -5,6 +5,7 @@ using DockerAPIS.Services.Contact.Model.Entity;
 using DockerAPIS.Services.Contact.Model.Exchange.AddContact;
 using DockerAPIS.Services.Contact.Model.Exchange.GetContact;
 using DockerAPIS.Services.Contact.Model.Exchange.GetContactsList;
+using DockerAPIS.Architecture.AppException.Model.Derived.DataNotFound;
 
 namespace DockerAPIS.Services.Contact.Manager.Business.Implementation
 {
@@ -30,7 +31,10 @@ namespace DockerAPIS.Services.Contact.Manager.Business.Implementation
 
         public async Task<GetContactResponseModel> Get(string id)
         {
-            return mapper.Map<GetContactResponseModel>(await contactCacheOperations.GetByKey(id));
+            Person person = await contactCacheOperations.GetByKey(id);
+            if(person == null) throw new DataNotFoundException(entityName: "Person", value:id);
+
+            return mapper.Map<GetContactResponseModel>(person);
         }
 
         public async Task<IEnumerable<GetContactsListModel>> GetAll()

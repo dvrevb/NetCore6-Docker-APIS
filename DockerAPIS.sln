@@ -75,6 +75,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerAPIS.Services.Classro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerAPIS.Services.Classroom.Model.DTO", "Services\Classroom\Model\DockerAPIS.Services.Classroom.Model.DTO\DockerAPIS.Services.Classroom.Model.DTO.csproj", "{720BE523-7A6A-494B-AD29-0FDBA424DD8E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DockerAPIS.Architecture.AppException", "DockerAPIS.Architecture.AppException", "{D15AA93C-A099-4BC4-9910-8CD2E0D1D060}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerAPIS.Architecture.AppException.Manager", "Architecture\AppException\DockerAPIS.Architecture.AppException.Manager\DockerAPIS.Architecture.AppException.Manager.csproj", "{E98DD025-B985-41E9-B930-EC92B6AFF341}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DockerAPIS.Architecture.AppException.Model", "Architecture\AppException\DockerAPIS.Architecture.AppException.Model\DockerAPIS.Architecture.AppException.Model.csproj", "{37CDC279-E84D-4CE4-84CF-68D1CE722B8A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DockerAPIS.Gateway", "DockerAPIS.Gateway", "{065605B6-7817-4883-8551-5ABF675B7998}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerAPIS.GateWay.Web", "Gateway\DockerAPIS.GateWay.Web\DockerAPIS.GateWay.Web.csproj", "{A319A547-9ECE-4FBB-A335-443AC4371AEC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -165,6 +175,18 @@ Global
 		{720BE523-7A6A-494B-AD29-0FDBA424DD8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{720BE523-7A6A-494B-AD29-0FDBA424DD8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{720BE523-7A6A-494B-AD29-0FDBA424DD8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E98DD025-B985-41E9-B930-EC92B6AFF341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E98DD025-B985-41E9-B930-EC92B6AFF341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E98DD025-B985-41E9-B930-EC92B6AFF341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E98DD025-B985-41E9-B930-EC92B6AFF341}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37CDC279-E84D-4CE4-84CF-68D1CE722B8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37CDC279-E84D-4CE4-84CF-68D1CE722B8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37CDC279-E84D-4CE4-84CF-68D1CE722B8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37CDC279-E84D-4CE4-84CF-68D1CE722B8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A319A547-9ECE-4FBB-A335-443AC4371AEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A319A547-9ECE-4FBB-A335-443AC4371AEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A319A547-9ECE-4FBB-A335-443AC4371AEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A319A547-9ECE-4FBB-A335-443AC4371AEC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -203,6 +225,10 @@ Global
 		{9E9A4718-1843-4C2F-AEF7-50B26793AEF4} = {600BE191-6757-4469-BB3F-E7856F0059C9}
 		{46733C61-E4BE-441E-BAF2-23EFC2921804} = {600BE191-6757-4469-BB3F-E7856F0059C9}
 		{720BE523-7A6A-494B-AD29-0FDBA424DD8E} = {600BE191-6757-4469-BB3F-E7856F0059C9}
+		{D15AA93C-A099-4BC4-9910-8CD2E0D1D060} = {721E9132-41B0-43E4-81CC-9EB3DB171267}
+		{E98DD025-B985-41E9-B930-EC92B6AFF341} = {D15AA93C-A099-4BC4-9910-8CD2E0D1D060}
+		{37CDC279-E84D-4CE4-84CF-68D1CE722B8A} = {D15AA93C-A099-4BC4-9910-8CD2E0D1D060}
+		{A319A547-9ECE-4FBB-A335-443AC4371AEC} = {065605B6-7817-4883-8551-5ABF675B7998}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3117D5F3-0D96-43DE-AAD7-2E70E6C8D6B6}

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AppException\DockerAPIS.Architecture.AppException.Manager\DockerAPIS.Architecture.AppException.Manager.csproj" />
     <ProjectReference Include="..\..\Concern\DockerAPIS.Architecture.Concern\DockerAPIS.Architecture.Concern.Options\DockerAPIS.Architecture.Concern.Options.csproj" />
   </ItemGroup>
 

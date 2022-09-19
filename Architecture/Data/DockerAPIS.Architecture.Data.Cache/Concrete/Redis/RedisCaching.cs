@@ -24,7 +24,7 @@ namespace DockerAPIS.Architecture.Data.Cache.Concrete.Redis
         {
             /*get all data*/
             IServer server = multiplexer.GetServer(multiplexer.GetEndPoints().First());
-            IEnumerable<string> keys = server.Keys().Select(key => (string)key).ToList();
+            IEnumerable<string?> keys = server.Keys().Select(key => (string?)key).ToList();
 
             List<TEntity> values = new List<TEntity>();
             foreach (var item in keys)
@@ -36,12 +36,12 @@ namespace DockerAPIS.Architecture.Data.Cache.Concrete.Redis
             return values;
         }
 
-        public async Task<TEntity> GetByKey(string key)
+        public async Task<TEntity?> GetByKey(string key)
         {
             var value = await redisDb.StringGetAsync(key);
-            if (!value.IsNullOrEmpty)
-                return JsonConvert.DeserializeObject<TEntity>(value);
-            throw new NullReferenceException();
+            if (value.IsNullOrEmpty)
+                return default;
+            return JsonConvert.DeserializeObject<TEntity>(value);
         }
 
         public async Task<bool> RemoveByKey(string key)
@@ -50,7 +50,7 @@ namespace DockerAPIS.Architecture.Data.Cache.Concrete.Redis
         }
 
         public async Task<bool> Set(string key, TEntity value)
-        {    
+        {
             return await redisDb.StringSetAsync(key, JsonConvert.SerializeObject(value));
         }
     }

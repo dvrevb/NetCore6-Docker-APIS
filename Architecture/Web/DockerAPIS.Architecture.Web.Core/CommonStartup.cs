@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using StackExchange.Redis;
 using DockerAPIS.Architecture.Concern.Options;
 using AutoMapper;
-using System.ComponentModel.DataAnnotations;
+using DockerAPIS.Architecture.AppException.Manager;
 
 namespace DockerAPIS.Architecture.Web.Core
 {
@@ -12,7 +12,7 @@ namespace DockerAPIS.Architecture.Web.Core
         public static void CommonServiceConfiguration(ServiceConfigurationOptions options)
         {
             ConfigureRedis(options.Services, options.Config);
-
+            options.Services.AddSingleton(typeof(ExceptionParser));
             if (options.AutoMapperProfile != null)
             {
                 ConfigureAutoMapper(options.Services, options.AutoMapperProfile);
@@ -25,7 +25,7 @@ namespace DockerAPIS.Architecture.Web.Core
                 config.AddProfile(mappingProfile);
             });
             IMapper mapper = mapperConfig.CreateMapper();
-            services.AddSingleton(mapper);
+            services.AddSingleton(mapper);         
         }
 
         private static void ConfigureRedis(IServiceCollection services, IConfiguration config)

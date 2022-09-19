@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\Architecture\AppException\DockerAPIS.Architecture.AppException.Model\DockerAPIS.Architecture.AppException.Model.csproj" />
     <ProjectReference Include="..\..\..\..\Architecture\Data\DockerAPIS.Architecture.Data.Cache\DockerAPIS.Architecture.Data.Cache.csproj" />
     <ProjectReference Include="..\..\..\Classroom\ExternalData\DockerAPIS.Services.Classroom.ExternalData.Model\DockerAPIS.Services.Classroom.ExternalData.Model.csproj" />
     <ProjectReference Include="..\..\Model\DockerAPIS.Services.Contact.Model.Entity\DockerAPIS.Services.Contact.Model.Entity.csproj" />
