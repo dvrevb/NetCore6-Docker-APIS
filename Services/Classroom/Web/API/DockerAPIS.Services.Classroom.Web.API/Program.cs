@@ -17,13 +17,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
 builder.Configuration.AddJsonFile($"Configuration/Cache/Redis/RedisSettings.json");
 CommonStartup.CommonServiceConfiguration(new ServiceConfigurationOptions(builder.Services, builder.Configuration)
 {
-    AutoMapperProfile = new ClassroomMappingProfile()
-});
+    AutoMapperProfile = new ClassroomMappingProfile(),
+    UseSwagger = true
+},true);;
 
 builder.Services.AddScoped<IClassroomBusinessManager, ClassroomBusinessManager>();
 builder.Services.AddScoped<IClassroomOperations, ClassroomOperations>();
@@ -31,15 +31,14 @@ builder.Services.AddScoped<IContactDataStore, ContactsServiceManager>();
 builder.Services.AddScoped<ICache<Lecture>, RedisCaching<Lecture>>();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+CommonStartup.CommonAppConfiguration(new AppConfigurationOptions(app, app.Environment)
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseAuthorization();
-
-app.MapControllers();
+    SwaggerSettings = new()
+    {
+        APIName = "classroomapi",
+        SwaggerEndpoint = "/swagger/v1/swagger.json",
+        Server = "/Classroom"
+    }
+});
 
 app.Run();

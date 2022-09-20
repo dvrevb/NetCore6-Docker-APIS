@@ -3,68 +3,53 @@
     //Classroom API
     {
       "UpstreamPathTemplate": "/Classroom/{everything}",
-      "UpstreamHttpMethod": ["GET"],
-      "DownstreamPathTemplate": "/api/Classroom/{everything}",
+      "UpstreamHttpMethod": [ "POST", "GET", "PUT" ],
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "classroomapi",
           "Port": 80
         }
-      ],
-      "AuthenticationOptions": {
-        //"AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
-    },
-    {
-      "UpstreamPathTemplate": "/Classroom",
-      "UpstreamHttpMethod": [ "POST", "GET", "PUT"],
-      "DownstreamPathTemplate": "/api/Classroom",
-      "DownstreamScheme": "http",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "classroomapi",
-          "Port": 80
-        }
-      ],
-      "AuthenticationOptions": {
-        //"AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      ]
     },
     //Contacts API
     {
       "UpstreamPathTemplate": "/Contacts/{everything}",
-      "UpstreamHttpMethod": [ "GET" ],
-      "DownstreamPathTemplate": "/api/Contacts/{everything}",
+      "UpstreamHttpMethod": [ "POST", "GET", "PUT" ],
+      "DownstreamPathTemplate": "/{everything}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "contactsapi",
           "Port": 80
         }
-      ],
-      "AuthenticationOptions": {
-        //"AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      ]
+    },
+    //Swagger Docs
+    {
+      "UpstreamPathTemplate": "/ClassroomDocs/swagger/v1/swagger.json",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "classroomapi",
+          "Port": 80
+        }
+      ]
     },
     {
-      "UpstreamPathTemplate": "/Contacts",
-      "UpstreamHttpMethod": [ "POST", "GET", "PUT" ],
-      "DownstreamPathTemplate": "/api/Contacts",
+      "UpstreamPathTemplate": "/ContactsDocs/swagger/v1/swagger.json",
+      "UpstreamHttpMethod": [ "GET" ],
+      "DownstreamPathTemplate": "/swagger/v1/swagger.json",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "contactsapi",
           "Port": 80
         }
-      ],
-      "AuthenticationOptions": {
-        //"AuthenticationProviderKey": "Bearer",
-        "AllowedScopes": []
-      }
+      ]
     }
   ]
 }

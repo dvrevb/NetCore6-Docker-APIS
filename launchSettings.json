@@ -4,13 +4,14 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "composeLaunchAction": "LaunchBrowser",
-      "composeLaunchServiceName": "contactsapi",
-      "composeLaunchUrl": "{Scheme}://{ServiceIPAddress}{ServicePort}/swagger",
+      "composeLaunchServiceName": "classroomapi",
+      "composeLaunchUrl": "{Scheme}://{ServiceIPAddress}{ServicePort}",
       "serviceActions": {
         "classroomapi": "StartDebugging",
         "classroomcache": "StartWithoutDebugging",
         "contactsapi": "StartDebugging",
-        "contactscache": "StartWithoutDebugging"
+        "contactscache": "StartWithoutDebugging",
+        "gateway.web": "StartDebugging"
       }
     }
   }
