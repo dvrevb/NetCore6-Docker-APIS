@@ -14,8 +14,6 @@ services:
     image: ${DOCKER_REGISTRY-}contacts
     container_name: ContactsAPI
     hostname: contactsapi
-    ports: 
-      - "8011:80"
     build:
       context: .
       dockerfile: Services\Contact\Web\API\DockerAPIS.Services.Contact.Web.API\Dockerfile
@@ -24,8 +22,6 @@ services:
     image: ${DOCKER_REGISTRY-}classroom
     container_name: ClassroomAPI
     hostname: classroomapi
-    ports: 
-      - "8012:80"
     build:
       context: .
       dockerfile: Services\Classroom\Web\API\DockerAPIS.Services.Classroom.Web.API\Dockerfile
