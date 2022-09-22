@@ -15,7 +15,6 @@ CommonStartup.CommonServiceConfiguration(new ServiceConfigurationOptions(builder
     UseSwagger = true
 });
 builder.Configuration.AddJsonFile($"Configuration/Ocelot/Ocelot.json", false, true);
-builder.Configuration.AddJsonFile($"Configuration/Cache/Redis/RedisSettings.json", false, true);
 builder.Services.AddOcelot();
 var app = builder.Build();
 
